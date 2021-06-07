@@ -1,5 +1,6 @@
 import requests
 import json
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 # 企业id、key
 CORP_ID = 'xxx' # 更换为你的企业id
@@ -32,5 +33,7 @@ def send_text_message(content, touser):
     print(res)
 
 if __name__ == '__main__':
-    send_text_message('hello world!', '@all')
-            
+    scheduler = BlockingScheduler(timezone="Asia/Shanghai")
+    # 整分钟时刻发送消息
+    scheduler.add_job(send_text_message, 'cron', ('hello world', '@all'), minute="*/1")
+    scheduler.start()
