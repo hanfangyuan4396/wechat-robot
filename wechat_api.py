@@ -59,7 +59,7 @@ class WeChatAPI():
         # 更新token，重新发送消息
         if response['errcode']==42001 or response['errcode']==40014:
             self.update_token()
-            self.send_message(title, text, agent_id=agent_id, touser=touser)
+            self.send_text_message(title, text, agent_id=agent_id, touser=touser)
         # 发送成功
         elif response['errcode'] == 0:
             print(title, '发送成功')
